@@ -46,10 +46,11 @@ mod() {
 #
 
 bin() {
-  mkdir -p bin
   if [[ -d ./support/$mod/bin ]]; then
+    mkdir -p bin && cd bin
     log "linking $mod/bin/*"
-    ln -sf support/$mod/bin/* bin
+    ln -sf ../support/$mod/bin/* ./
+    cd ..
   fi
 }
 
