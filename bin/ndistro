@@ -30,7 +30,7 @@ mod() {
   local url="http://github.com/$user/$mod/tarball/$version"
   log "installing $user/$mod $version"
   mkdir -p $dest
-  cd $dest && curl -# -L $url | tar -xz --strip 1
+  cd $dest && curl -# -L $url | tar -xz --strip 1 && cd ../..
 }
 
 if [[ -f ./.ndistro ]]; then
