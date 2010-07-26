@@ -3,7 +3,7 @@
 
  Node distribution toolkit written in _bash_. _nDistro_ allows you to build your own
  [node](http://nodejs.org) distribution using a simple configuration file, without 
-dependencies large programs.
+dependencies large programs. To contribute a node binary head over to [nodes](http://github.com/visionmedia/nodes).
 
 ## Installation
 
