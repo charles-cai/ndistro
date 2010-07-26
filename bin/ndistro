@@ -136,6 +136,10 @@ usage() {
 
 Usage: ndistro [options] [cmd]
 
+Commands:
+
+  edit   Opens CWD/.ndistro in $EDITOR
+
 Options:
 
 -V, --version   Output version number
@@ -152,6 +156,9 @@ case $1 in
     ;;
   -V|--version)
     echo $VERSION && exit 1
+    ;;
+  edit)
+    $EDITOR $ROOT/.ndistro
     ;;
   *)
     install
