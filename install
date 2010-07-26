@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-cp -f bin/ndistro /usr/local/bin/ndistro && echo "... Installation complete"
+curl -# -L http://github.com/visionmedia/ndistro/raw/master/bin/ndistro \
+  > /usr/local/bin/ndistro && \
+  chmod 0755 /usr/local/bin/ndistro && \
+  echo "... installation complete"
