@@ -33,9 +33,14 @@ and then in your distro directory that contains _.ndistro_ run:
 
   Specifies the _version_ of node to install.
 
+    node 0.1.102
+
 ## module <user> <project> [version]
 	
   Installs _user_'s _project_ at the given _version_ or **HEAD**.
+
+    module visionmedia express
+    module visionmedia express 1.0.0beta2
 
 ## License
 
