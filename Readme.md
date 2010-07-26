@@ -1,8 +1,13 @@
 
 # nDistro
 
- Node distribution toolkit. _nDistro_ allows you to build your own
- [node](http://nodejs.org) distribution using a simply configuration file.
+ Node distribution toolkit written in _bash_. _nDistro_ allows you to build your own
+ [node](http://nodejs.org) distribution using a simple configuration file, without 
+dependencies large programs.
+
+## Installation
+
+   $ curl https://github.com/visionmedia/ndistro/raw/master/install | sh
 
 ## Example distribution
 
