@@ -10,6 +10,7 @@
 # Library version
 
 VERSION="0.0.1"
+ROOT=$(pwd)
 BIN_URL="http://github.com/visionmedia/nodes/raw/master"
 BIN_VERSION=
 
@@ -37,7 +38,7 @@ module() {
   local user=$1
   local mod=$2
   local version=${3-master}
-  local dest="./modules/$mod"
+  local dest="$ROOT/modules/$mod"
   local url="http://github.com/$user/$mod/tarball/$version"
   if [[ $version = "master" ]]; then
     log "installing $user/$mod"
@@ -58,8 +59,8 @@ module() {
 #
 
 bin() {
-  if [[ -d ./modules/$mod/bin ]]; then
-    cd bin
+  if [[ -d $ROOT/modules/$mod/bin ]]; then
+    cd $ROOT/bin
     ln -sf ../modules/$mod/bin/* ./
     cd ..
   fi
@@ -69,8 +70,8 @@ bin() {
 # Install <mod> library.
 #
 lib() {
-  if [[ -d ./modules/$mod/lib ]]; then
-    mkdir -p lib/node && cd lib/node
+  if [[ -d $ROOT/modules/$mod/lib ]]; then
+    mkdir -p $ROOT/lib/node && cd $ROOT/lib/node
     ln -sf ../../modules/$mod/lib/* ./
     cd ../..
   fi
@@ -103,7 +104,7 @@ install_node_detect() {
 install_node() {
   local version=$1
   local sys=$2
-  mkdir -p bin
+  mkdir -p $ROOT/bin
   local url="$BIN_URL/$version-$sys"
   log "installing node $version"
   curl -# -L $url > bin/node && chmod 0755 bin/node
@@ -119,9 +120,9 @@ node() {
 
 # Load ./ndistro
 
-if [[ -f ./.ndistro ]]; then
-  . ./.ndistro
- install_node_detect $BIN_VERSION
+if [[ -f $ROOT/.ndistro ]]; then
+  . $ROOT/.ndistro
+  install_node_detect $BIN_VERSION
 else
   abort ".ndistro not found in this directory"
 fi
