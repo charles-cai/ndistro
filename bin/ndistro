@@ -11,6 +11,7 @@
 
 VERSION="0.0.1"
 BIN_URL="http://github.com/visionmedia/nodes/raw/master"
+BIN_VERSION=
 
 #
 # Exit with the given <msg ...>
@@ -108,11 +109,19 @@ install_node() {
   curl -# -L $url > bin/node && chmod 0755 bin/node
 }
 
+#
+# Set node <version>.
+#
+
+version() {
+  BIN_VERSION=$1
+}
+
 # Load ./ndistro
 
 if [[ -f ./.ndistro ]]; then
-  node "0.1.101"
   . ./.ndistro
+ node ${BIN_VERSION-$(curl $BIN_URL/latest 2> /dev/null)}
 else
   abort ".ndistro not found in this directory"
 fi
