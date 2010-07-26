@@ -37,8 +37,23 @@ mod() {
   cd $dest \
     && curl -# -L $url \
     | tar -xz --strip 1 \
-    && cd ../..
+    && cd ../.. \
+    && bin $mod
 }
+
+#
+# Install <mod> binaries.
+#
+
+bin() {
+  mkdir -p bin
+  if [[ -d ./support/$mod/bin ]]; then
+    log "linking $mod/bin/*"
+    ln -sf support/$mod/bin/* bin
+  fi
+}
+
+# Load ./ndistro
 
 if [[ -f ./.ndistro ]]; then
   . ./.ndistro
