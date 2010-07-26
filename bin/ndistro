@@ -35,7 +35,7 @@ mod() {
   local user=$1
   local mod=$2
   local version=${3-master}
-  local dest="./support/$mod"
+  local dest="./modules/$mod"
   local url="http://github.com/$user/$mod/tarball/$version"
   if [[ $version = "master" ]]; then
     log "installing $user/$mod"
@@ -55,10 +55,10 @@ mod() {
 #
 
 bin() {
-  if [[ -d ./support/$mod/bin ]]; then
+  if [[ -d ./modules/$mod/bin ]]; then
     mkdir -p bin && cd bin
     log "linking $mod/bin/*"
-    ln -sf ../support/$mod/bin/* ./
+    ln -sf ../modules/$mod/bin/* ./
     cd ..
   fi
 }
