@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+#
+# nDistro - Node distribution manager
+# 
+# Copyright (c) 2010 - TJ Holowaychuk <tj@vision-media.ca>
+# Licensed MIT.
+#
+
+# Library version
+
 VERSION="0.0.1"
 
 #
