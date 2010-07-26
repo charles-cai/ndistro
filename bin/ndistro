@@ -33,7 +33,7 @@ log() {
 # Install <user> <mod> [version]
 #
 
-mod() {
+module() {
   local user=$1
   local mod=$2
   local version=${3-master}
@@ -80,7 +80,7 @@ lib() {
 # Detect which node binary to install of the given <version>.
 #
 
-node() {
+install_node_detect() {
   local version=$1
   local name=$(uname)
   case $name in
@@ -113,7 +113,7 @@ install_node() {
 # Set node <version>.
 #
 
-version() {
+node() {
   BIN_VERSION=$1
 }
 
@@ -121,7 +121,7 @@ version() {
 
 if [[ -f ./.ndistro ]]; then
   . ./.ndistro
- node $BIN_VERSION
+ install_node_detect $BIN_VERSION
 else
   abort ".ndistro not found in this directory"
 fi
