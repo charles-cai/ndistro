@@ -10,7 +10,7 @@
 # Library version
 
 VERSION="0.0.1"
-BIN_URL="http://github.com/creationix/ivy-bin/raw/master/node-"
+BIN_URL="http://github.com/visionmedia/nodes/raw/master"
 
 #
 # Exit with the given <msg ...>
@@ -76,17 +76,18 @@ lib() {
 }
 
 #
-# Detect which node binary to install.
+# Detect which node binary to install of the given <version>.
 #
 
 node() {
+  local version=$1
   local name=$(uname)
   case $name in
     Darwin)
-      install_node osx
+      install_node $version osx
       ;;
     Linux)
-      install_node linux
+      install_node $version linux
       ;;
     *)
       abort "Cannot find node binary for $name."
@@ -95,20 +96,22 @@ node() {
 }
 
 #
-# Install node binary <name>
+# Install node binary <version> <sys>
 #
 
 install_node() {
+  local version=$1
+  local sys=$2
   mkdir -p bin
-  local url=$BIN_URL$1
-  log "installing $url"
+  local url="$BIN_URL/$version-$sys"
+  log "installing node $version"
   curl -# -L $url > bin/node && chmod 0755 bin/node
 }
 
 # Load ./ndistro
 
 if [[ -f ./.ndistro ]]; then
-  node
+  node "0.1.101"
   . ./.ndistro
 else
   abort ".ndistro not found in this directory"
