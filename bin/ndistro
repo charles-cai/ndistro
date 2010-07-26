@@ -131,20 +131,24 @@ install() {
   fi
 }
 
-# Load ./ndistro
-
-case $1 in
-  -h|--help)
-    cat <<-HELP
+usage() {
+  cat <<-HELP
 
 Usage: ndistro [options] [cmd]
 
 Options:
 
-  -V, --version   Output version number
-  -h, --help      Output help information
+-V, --version   Output version number
+-h, --help      Output help information
 
 HELP
+}
+
+# Load ./ndistro
+
+case $1 in
+  -h|--help)
+    usage && exit 1
     ;;
   -V|--version)
     echo $VERSION && exit 1
