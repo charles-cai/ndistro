@@ -1,3 +1,8 @@
 
+mod senchalabs connect
 mod visionmedia express
+mod visionmedia connect-form
+mod visionmedia connect-redis
+mod visionmedia keys
 mod visionmedia jade
+mod visionmedia ejs

@@ -19,16 +19,16 @@ log() {
 }
 
 #
-# Install <user> <mod> [dest]
+# Install <user> <mod> [version]
 #
 
 mod() {
   local user=$1
   local mod=$2
-  local dest=${3-./support/$mod}
-  local version="master"
+  local version=${3-master}
+  local dest="./support/$mod"
   local url="http://github.com/$user/$mod/tarball/$version"
-  log "installing $user/$mod $version to $dest"
+  log "installing $user/$mod $version"
   mkdir -p $dest
   cd $dest && curl -# -L $url | tar -xz --strip 1
 }
