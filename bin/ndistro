@@ -34,7 +34,10 @@ mod() {
     log "installing $user/$mod $version"
   fi
   mkdir -p $dest
-  cd $dest && curl -# -L $url | tar -xz --strip 1 && cd ../..
+  cd $dest \
+    && curl -# -L $url \
+    | tar -xz --strip 1 \
+    && cd ../..
 }
 
 if [[ -f ./.ndistro ]]; then
