@@ -47,7 +47,8 @@ mod() {
     && curl -# -L $url \
     | tar -xz --strip 1 \
     && cd ../.. \
-    && bin $mod
+    && bin $mod \
+    && lib $mod
 }
 
 #
@@ -57,9 +58,19 @@ mod() {
 bin() {
   if [[ -d ./modules/$mod/bin ]]; then
     mkdir -p bin && cd bin
-    log "linking $mod/bin/*"
     ln -sf ../modules/$mod/bin/* ./
     cd ..
+  fi
+}
+
+#
+# Install <mod> library.
+#
+lib() {
+  if [[ -d ./modules/$mod/lib ]]; then
+    mkdir -p lib/node && cd lib/node
+    ln -sf ../../modules/$mod/lib/* ./
+    cd ../..
   fi
 }
 
