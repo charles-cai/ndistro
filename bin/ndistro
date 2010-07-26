@@ -40,18 +40,22 @@ module() {
   local version=${3-master}
   local dest="$ROOT/modules/$mod"
   local url="http://github.com/$user/$mod/tarball/$version"
-  if [[ $version = "master" ]]; then
-    log "installing $user/$mod"
+  if [[ -d $dest ]]; then
+    log "already installed $mod"
   else
-    log "installing $user/$mod $version"
+    if [[ $version = "master" ]]; then
+      log "installing $mod"
+    else
+      log "installing $mod $version"
+    fi
+    mkdir -p $dest
+    cd $dest \
+      && curl -# -L $url \
+      | tar -xz --strip 1 \
+      && cd ../.. \
+      && bin $mod \
+      && lib $mod
   fi
-  mkdir -p $dest
-  cd $dest \
-    && curl -# -L $url \
-    | tar -xz --strip 1 \
-    && cd ../.. \
-    && bin $mod \
-    && lib $mod
 }
 
 #
@@ -102,12 +106,16 @@ install_node_detect() {
 #
 
 install_node() {
-  local version=$1
-  local sys=$2
-  mkdir -p $ROOT/bin
-  local url="$BIN_URL/$version-$sys"
-  log "installing node $version"
-  curl -# -L $url > bin/node && chmod 0755 bin/node
+  if [[ -f $ROOT/bin/node ]]; then
+    log "already installed node"
+  else
+    local version=$1
+    local sys=$2
+    mkdir -p $ROOT/bin
+    local url="$BIN_URL/$version-$sys"
+    log "installing node $version"
+    curl -# -L $url > bin/node && chmod 0755 bin/node
+  fi
 }
 
 #
