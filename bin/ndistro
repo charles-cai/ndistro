@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+VERSION="0.0.1"
+
+#
+# Exit with the given <msg ...>
+#
+
+abort() {
+  echo "Error: $@" && exit 1
+}
+
+#
+# Log the given <msg ...>
+#
+
+log() {
+  echo "... $@"
+}
+
+#
+# Install <user> <mod> [dest]
+#
+
+mod() {
+  local user=$1
+  local mod=$2
+  local dest=${3-./support/$mod}
+  local version="master"
+  local url="http://github.com/$user/$mod/tarball/$version"
+  log "installing $user/$mod $version to $dest"
+  mkdir -p $dest
+  cd $dest && curl -# -L $url | tar -xz --strip 1
+}
+
+if [[ -f ./.ndistro ]]; then
+  . ./.ndistro
+else
+  abort ".ndistro not found in this directory"
+fi
+
