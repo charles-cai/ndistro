@@ -10,6 +10,7 @@
 # Library version
 
 VERSION="0.0.1"
+BIN_URL="http://github.com/creationix/ivy-bin/raw/master/node-"
 
 #
 # Exit with the given <msg ...>
@@ -57,7 +58,7 @@ mod() {
 
 bin() {
   if [[ -d ./modules/$mod/bin ]]; then
-    mkdir -p bin && cd bin
+    cd bin
     ln -sf ../modules/$mod/bin/* ./
     cd ..
   fi
@@ -74,9 +75,40 @@ lib() {
   fi
 }
 
+#
+# Detect which node binary to install.
+#
+
+node() {
+  local name=$(uname)
+  case $name in
+    Darwin)
+      install_node osx
+      ;;
+    Linux)
+      install_node linux
+      ;;
+    *)
+      abort "Cannot find node binary for $name."
+      ;;
+  esac
+}
+
+#
+# Install node binary <name>
+#
+
+install_node() {
+  mkdir -p bin
+  local url=$BIN_URL$1
+  log "installing $url"
+  curl -# -L $url > bin/node && chmod 0755 bin/node
+}
+
 # Load ./ndistro
 
 if [[ -f ./.ndistro ]]; then
+  node
   . ./.ndistro
 else
   abort ".ndistro not found in this directory"
