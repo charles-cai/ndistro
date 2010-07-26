@@ -126,6 +126,7 @@ install() {
   if [[ -f $ROOT/.ndistro ]]; then
     . $ROOT/.ndistro
     install_node_detect $BIN_VERSION
+    log "installation complete"
   else
     abort ".ndistro not found in this directory"
   fi
