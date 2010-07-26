@@ -150,21 +150,17 @@ HELP
 
 # Handle arguments
 
-if [[ $# -eq 0 ]]; then
-  install
-else
-  case $1 in
-    -h|--help)
-      usage && exit 1
-      ;;
-    -V|--version)
-      echo $VERSION && exit 1
-      ;;
-    edit)
-      $EDITOR $ROOT/.ndistro
-      ;;
-    *)
-      echo $@
-      ;;
-  esac
-fi
+case $1 in
+  -h|--help)
+    usage && exit 1
+    ;;
+  -V|--version)
+    echo $VERSION && exit 1
+    ;;
+  edit)
+    $EDITOR $ROOT/.ndistro
+    ;;
+  *)
+    install
+    ;;
+esac
