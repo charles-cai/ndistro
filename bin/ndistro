@@ -118,12 +118,27 @@ node() {
   BIN_VERSION=$1
 }
 
+#
+# Install distro.
+#
+
+install() {
+  if [[ -f $ROOT/.ndistro ]]; then
+    . $ROOT/.ndistro
+    install_node_detect $BIN_VERSION
+  else
+    abort ".ndistro not found in this directory"
+  fi
+}
+
 # Load ./ndistro
 
-if [[ -f $ROOT/.ndistro ]]; then
-  . $ROOT/.ndistro
-  install_node_detect $BIN_VERSION
-else
-  abort ".ndistro not found in this directory"
-fi
+case $1 in
+  -V|--version)
+    echo $VERSION && exit 1
+    ;;
+  *)
+    install
+    ;;
+esac
 
