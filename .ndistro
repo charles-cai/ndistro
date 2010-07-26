@@ -1,6 +1,6 @@
 
 mod senchalabs connect
-mod visionmedia express
+mod visionmedia express 1.0.0beta2
 mod visionmedia connect-form
 mod visionmedia connect-redis
 mod visionmedia keys
