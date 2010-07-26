@@ -134,6 +134,18 @@ install() {
 # Load ./ndistro
 
 case $1 in
+  -h|--help)
+    cat <<-HELP
+
+Usage: ndistro [options] [cmd]
+
+Options:
+
+  -V, --version   Output version number
+  -h, --help      Output help information
+
+HELP
+    ;;
   -V|--version)
     echo $VERSION && exit 1
     ;;
