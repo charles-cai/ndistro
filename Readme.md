@@ -32,6 +32,8 @@ several 3rd party modules.
 	
   Installs _user_'s _project_ at the given _version_ or **HEAD**.
 
+## License
+
 (The MIT License)
 
 Copyright (c) 2010 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
