@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cp -f bin/ndistro /usr/local/bin/ndistro && echo "... Installation complete"
