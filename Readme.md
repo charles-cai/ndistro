@@ -24,6 +24,11 @@ several 3rd party modules.
 	module visionmedia jade
 	module visionmedia ejs
 
+Follow the installation step above to gain access to the _ndistro_ executable,
+and then in your distro directory that contains _.ndistro_ run:
+
+    $ ndistro
+
 ## node <version>
 
   Specifies the _version_ of node to install.
