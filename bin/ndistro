@@ -121,7 +121,7 @@ version() {
 
 if [[ -f ./.ndistro ]]; then
   . ./.ndistro
- node ${BIN_VERSION-$(curl $BIN_URL/latest 2> /dev/null)}
+ node $BIN_VERSION
 else
   abort ".ndistro not found in this directory"
 fi
