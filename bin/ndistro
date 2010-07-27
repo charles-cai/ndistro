@@ -140,6 +140,10 @@ install() {
   fi
 }
 
+#
+# Output usage information.
+# 
+
 usage() {
   cat <<-HELP
 
