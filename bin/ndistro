@@ -111,7 +111,6 @@ install_node() {
   else
     local version=$1
     local sys=$2
-    mkdir -p $ROOT/bin
     local url="$BIN_URL/$version-$sys"
     log "installing node $version"
     curl -# -L $url > bin/node && chmod 0755 bin/node
@@ -131,6 +130,7 @@ node() {
 #
 
 install() {
+  mkdir -p $ROOT/bin
   if [[ -f $ROOT/.ndistro ]]; then
     . $ROOT/.ndistro
     install_node_detect $BIN_VERSION
