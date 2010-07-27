@@ -13,10 +13,13 @@ VERSION="0.0.2"
 ROOT=$(pwd)
 BIN_URL="http://github.com/visionmedia/nodes/raw/master"
 BIN_VERSION=
+GET=
 
-# curl / wget support
+# wget support
+which wget > /dev/null && GET="wget -q -O-"
 
-GET="curl -# -L"
+# curl support
+which curl > /dev/null && GET="curl -# -L"
 
 #
 # Exit with the given <msg ...>
@@ -25,6 +28,10 @@ GET="curl -# -L"
 abort() {
   echo "Error: $@" && exit 1
 }
+
+# Ensure we have curl or wget
+
+[[ $GET ]] || abort "curl or wget required"
 
 #
 # Log the given <msg ...>
