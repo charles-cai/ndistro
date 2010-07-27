@@ -9,10 +9,17 @@
 
 # Library version
 
-VERSION="0.0.1"
+VERSION="0.0.2"
 ROOT=$(pwd)
 BIN_URL="http://github.com/visionmedia/nodes/raw/master"
 BIN_VERSION=
+GET=
+
+# wget support
+which wget > /dev/null && GET="wget -q -O-"
+
+# curl support
+which curl > /dev/null && GET="curl -# -L"
 
 #
 # Exit with the given <msg ...>
@@ -21,6 +28,10 @@ BIN_VERSION=
 abort() {
   echo "Error: $@" && exit 1
 }
+
+# Ensure we have curl or wget
+
+[[ $GET ]] || abort "curl or wget required"
 
 #
 # Log the given <msg ...>
@@ -50,7 +61,7 @@ module() {
     fi
     mkdir -p $dest
     cd $dest \
-      && curl -# -L $url \
+      && $GET $url \
       | tar -xz --strip 1 \
       && cd ../.. \
       && bin $mod \
@@ -113,7 +124,7 @@ install_node() {
     local sys=$2
     local url="$BIN_URL/$version-$sys"
     log "installing node $version"
-    curl -# -L $url > bin/node && chmod 0755 bin/node
+    $GET $url > bin/node && chmod 0755 bin/node
   fi
 }
 
