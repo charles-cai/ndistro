@@ -125,7 +125,12 @@ install_node() {
 #
 
 node() {
-  install_node $1 $(uname -m)
+  if [[ $1 = "latest" ]]; then
+    log "fetching latest node version"
+    install_node $($GET "$BIN_URL/latest") $(uname -m)
+  else
+    install_node $1 $(uname -m)
+  fi
 }
 
 #
