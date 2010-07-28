@@ -72,11 +72,24 @@ module() {
 #
 # Install <mod> binaries.
 #
+#  - alters shebang to $ROOT/bin/node
+#
 
 bin() {
   if [[ -d $ROOT/modules/$mod/bin ]]; then
     cd $ROOT/bin
-    ln -sf ../modules/$mod/bin/* ./
+    for bin in ../modules/$mod/bin/*; do
+      local name=${bin##*/}
+      log "installing bin/$name"
+      local shebang=$(head -n 1 $bin)
+      if [[ $shebang = "#!/usr/bin/env node" ]]; then
+        sed "s|/usr/bin/env node|$ROOT/bin/node|" $bin \
+          > ./$name \
+          && chmod 0755 ./$name 
+      else
+        ln -sf $bin ./$name
+      fi
+    done
     cd ..
   fi
 }
