@@ -105,27 +105,7 @@ lib() {
 }
 
 #
-# Detect which node binary to install of the given <version>.
-#
-
-install_node_detect() {
-  local version=$1
-  local name=$(uname)
-  case $name in
-    Darwin)
-      install_node $version osx
-      ;;
-    Linux)
-      install_node $version linux
-      ;;
-    *)
-      abort "Cannot find node binary for $name."
-      ;;
-  esac
-}
-
-#
-# Install node binary <version> <sys>
+# Install node binary <version> <machine>
 #
 
 install_node() {
@@ -133,9 +113,9 @@ install_node() {
     log "already installed node"
   else
     local version=$1
-    local sys=$2
-    local url="$BIN_URL/$version-$sys"
-    log "installing node $version"
+    local machine=$2
+    local url="$BIN_URL/$version-$machine"
+    log "installing node-$version-$machine"
     $GET $url > bin/node && chmod 0755 bin/node
   fi
 }
@@ -145,7 +125,7 @@ install_node() {
 #
 
 node() {
-  install_node_detect $1
+  install_node $1 $(uname -m)
 }
 
 #
