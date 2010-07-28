@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 curl -# -L http://github.com/visionmedia/ndistro/raw/master/bin/ndistro \
-  > /usr/local/bin/ndistro && \
-  chmod 0755 /usr/local/bin/ndistro && \
+  > ndistro && \
+  chmod 0755 ndistro && \
   echo "... installation complete"

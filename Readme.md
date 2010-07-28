@@ -7,7 +7,7 @@ dependencies large programs. To contribute a node binary head over to [nodes](ht
 
 ## Installation
 
-     $ curl http://github.com/visionmedia/ndistro/raw/master/install | sh
+     $ cd /usr/local/bin && curl http://github.com/visionmedia/ndistro/raw/master/install | sh
 
 ## Example distribution
 
