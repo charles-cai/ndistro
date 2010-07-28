@@ -12,7 +12,6 @@
 VERSION="0.0.3"
 ROOT=$(pwd)
 BIN_URL="http://github.com/visionmedia/nodes/raw/master"
-BIN_VERSION=
 GET=
 
 # wget support
@@ -146,7 +145,7 @@ install_node() {
 #
 
 node() {
-  BIN_VERSION=$1
+  install_node_detect $1
 }
 
 #
@@ -157,7 +156,6 @@ install() {
   mkdir -p $ROOT/bin
   if [[ -f $ROOT/.ndistro ]]; then
     . $ROOT/.ndistro
-    install_node_detect $BIN_VERSION
     log "installation complete"
   else
     abort ".ndistro not found in this directory"
