@@ -1,8 +1,0 @@
-
-node 0.1.102
-module senchalabs connect
-module visionmedia express 1.0.0beta2
-module visionmedia connect-form
-module visionmedia connect-redis
-module visionmedia jade
-module visionmedia ejs
