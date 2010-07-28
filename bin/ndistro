@@ -84,7 +84,7 @@ bin() {
       if [[ $shebang = "#!/usr/bin/env node" ]]; then
         sed "s|/usr/bin/env node|$ROOT/bin/node|" $bin \
           > ./$name \
-          && chmod 0755 ./$name 
+          && chmod a+x ./$name 
       else
         ln -sf $bin ./$name
       fi
