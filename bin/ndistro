@@ -148,6 +148,18 @@ install() {
 }
 
 #
+# Install <user> <distro>
+#
+
+install_user_distro() {
+  local user=$1
+  local distro=$2
+  log "fetching $user $distro"
+  $GET "http://github.com/$user/.ndistro/raw/master/$distro" > .ndistro \
+    && install
+}
+
+#
 # Output usage information.
 # 
 
@@ -158,7 +170,8 @@ Usage: ndistro [options] [cmd]
 
 Commands:
 
-  edit   Opens CWD/.ndistro in $EDITOR
+  edit              Opens CWD/.ndistro in $EDITOR
+  <user> <distro>   Installs the given <distro> from <user>
 
 Options:
 
@@ -169,18 +182,23 @@ HELP
 }
 
 # Handle arguments
-
-case $1 in
-  -h|--help)
-    usage && exit 1
-    ;;
-  -V|--version)
-    echo $VERSION && exit 1
-    ;;
-  edit)
-    $EDITOR $ROOT/.ndistro
-    ;;
-  *)
-    install
-    ;;
-esac
+echo $#
+if [[ $# -eq 0 ]]; then
+  install
+else
+  case $1 in
+    -h|--help)
+      usage && exit 1
+      ;;
+    -V|--version)
+      echo $VERSION && exit 1
+      ;;
+    edit)
+      $EDITOR $ROOT/.ndistro
+      ;;
+    *)
+      [[ $# -eq 1 ]] && list_user_distros $1
+      [[ $# -eq 2 ]] && install_user_distro $1 $2
+      ;;
+  esac
+fi
