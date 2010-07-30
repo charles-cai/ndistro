@@ -109,15 +109,11 @@ lib() {
 #
 
 install_node() {
-  if test -f $ROOT/bin/node; then
-    log "already installed node"
-  else
-    local version=$1
-    local machine=$2
-    local url="$BIN_URL/$version-$machine"
-    log "installing node-$version-$machine"
-    $GET $url > bin/node && chmod 0755 bin/node
-  fi
+  local version=$1
+  local machine=$2
+  local url="$BIN_URL/$version-$machine"
+  log "installing node-$version-$machine"
+  $GET $url > bin/node && chmod 0755 bin/node
 }
 
 #
@@ -125,11 +121,27 @@ install_node() {
 #
 
 node() {
+  local machine=$(uname -m)
   if test $1 = "latest"; then
-    log "fetching latest node version"
-    install_node $($GET "$BIN_URL/latest") $(uname -m)
+    log "fetching latest node"
+    local latest=$($GET "$BIN_URL/latest" 2> /dev/null)
+    if test -f $ROOT/bin/node; then
+      local version=$($ROOT/bin/node --version)
+      if test $version = "v$latest"; then
+        log "already up to date"
+      else
+        log "updating $version to v$latest"
+        install_node $latest $machine
+      fi
+    else
+      install_node $latest $machine
+    fi
   else
-    install_node $1 $(uname -m)
+    if test -f $ROOT/bin/node; then
+      log "already installed node $1"
+    else
+      install_node $1 $machine
+    fi
   fi
 }
 
