@@ -42,6 +42,11 @@ and then in your distro directory that contains _.ndistro_ run:
     module visionmedia express
     module visionmedia express 1.0.0beta2
 
+## Contributors
+
+  - TJ Holowaychuk ([visionmedia](http://github.com/visionmedia))
+  - Vladimir Dronnikov ([dvv](http://github.com/dvv))
+
 ## License
 
 (The MIT License)
