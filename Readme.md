@@ -46,6 +46,7 @@ and then in your distro directory that contains _.ndistro_ run:
 
   - TJ Holowaychuk ([visionmedia](http://github.com/visionmedia))
   - Vladimir Dronnikov ([dvv](http://github.com/dvv))
+  - Eric Clemmons ([ericclemmons](http://github.com/ericclemmons))
 
 ## License
 
