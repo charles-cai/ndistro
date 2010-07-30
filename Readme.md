@@ -51,7 +51,7 @@ or
 
     node 0.1.102
 
-## module <user> <project> [version]
+## module &lt;user&gt; &lt;project&gt; [version]
 	
   Installs _user_'s _project_ at the given _version_ or **HEAD**.
 
