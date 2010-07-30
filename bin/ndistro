@@ -53,7 +53,7 @@ module() {
   if test -d $dest; then
     log "already installed $mod"
   else
-    if test $version = "master"; then
+    if test "$version" = "master"; then
       log "installing $mod"
     else
       log "installing $mod $version"
@@ -81,7 +81,7 @@ bin() {
       local name=${bin##*/}
       log "installing bin/$name"
       local shebang=$(head -n 1 $bin)
-      if test $shebang = "#!/usr/bin/env node"; then
+      if test "$shebang" = "#!/usr/bin/env node"; then
         sed "s|/usr/bin/env node|$ROOT/bin/node|" $bin \
           > ./$name \
           && chmod a+x ./$name 
