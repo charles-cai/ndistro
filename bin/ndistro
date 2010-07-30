@@ -30,7 +30,7 @@ abort() {
 
 # Ensure we have curl or wget
 
-[[ $GET ]] || abort "curl or wget required"
+test -z "$GET" && abort "curl or wget required"
 
 #
 # Log the given <msg ...>
@@ -50,10 +50,10 @@ module() {
   local version=${3-master}
   local dest="$ROOT/modules/$mod"
   local url="http://github.com/$user/$mod/tarball/$version"
-  if [[ -d $dest ]]; then
+  if test -d $dest; then
     log "already installed $mod"
   else
-    if [[ $version = "master" ]]; then
+    if test $version = "master"; then
       log "installing $mod"
     else
       log "installing $mod $version"
@@ -75,13 +75,13 @@ module() {
 #
 
 bin() {
-  if [[ -d $ROOT/modules/$mod/bin ]]; then
+  if test -d $ROOT/modules/$mod/bin; then
     cd $ROOT/bin
     for bin in ../modules/$mod/bin/*; do
       local name=${bin##*/}
       log "installing bin/$name"
       local shebang=$(head -n 1 $bin)
-      if [[ $shebang = "#!/usr/bin/env node" ]]; then
+      if test $shebang = "#!/usr/bin/env node"; then
         sed "s|/usr/bin/env node|$ROOT/bin/node|" $bin \
           > ./$name \
           && chmod a+x ./$name 
@@ -97,7 +97,7 @@ bin() {
 # Install <mod> library.
 #
 lib() {
-  if [[ -d $ROOT/modules/$mod/lib ]]; then
+  if test -d $ROOT/modules/$mod/lib; then
     mkdir -p $ROOT/lib/node && cd $ROOT/lib/node
     ln -sf ../../modules/$mod/lib/* ./
     cd ../..
@@ -109,7 +109,7 @@ lib() {
 #
 
 install_node() {
-  if [[ -f $ROOT/bin/node ]]; then
+  if test -f $ROOT/bin/node; then
     log "already installed node"
   else
     local version=$1
@@ -125,7 +125,7 @@ install_node() {
 #
 
 node() {
-  if [[ $1 = "latest" ]]; then
+  if test $1 = "latest"; then
     log "fetching latest node version"
     install_node $($GET "$BIN_URL/latest") $(uname -m)
   else
@@ -139,7 +139,7 @@ node() {
 
 install() {
   mkdir -p $ROOT/bin
-  if [[ -f $ROOT/.ndistro ]]; then
+  if test -f $ROOT/.ndistro; then
     . $ROOT/.ndistro
     log "installation complete"
   else
@@ -196,7 +196,7 @@ HELP
 
 # Handle arguments
 
-if [[ $# -eq 0 ]]; then
+if test $# -eq 0; then
   install
 else
   case $1 in
@@ -210,8 +210,8 @@ else
       $EDITOR $ROOT/.ndistro
       ;;
     *)
-      [[ $# -eq 1 ]] && list_user_distros $1
-      [[ $# -eq 2 ]] && install_user_distro $1 $2
+      test $# -eq 1 && list_user_distros $1
+      test $# -eq 2 && install_user_distro $1 $2
       ;;
   esac
 fi
