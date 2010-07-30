@@ -29,6 +29,22 @@ and then in your distro directory that contains _.ndistro_ run:
 
     $ ndistro
 
+## Sharing Distributions
+
+To share distributions create a _.ndistro_ GitHub repository,
+after which you can push several distributions, for some
+examples view mine [here](http://github.com/visionmedia/.ndistro).
+
+To list a user's distributions execute:
+
+    $ ndistro visionmedia
+
+To install one to the **CWD** run:
+
+    $ ndistro visionmedia redis
+or
+    $ ndistro visionmedia express
+
 ## node <version>
 
   Specifies the _version_ of node to install.
