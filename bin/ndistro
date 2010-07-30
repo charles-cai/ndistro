@@ -160,6 +160,19 @@ install_user_distro() {
 }
 
 #
+# List <user> distros.
+#
+
+list_user_distros() {
+  local user=$1
+  log "fetching $user distro list"
+  $GET "http://github.com/api/v2/yaml/blob/all/$user/.ndistro/master" \
+    2> /dev/null \
+    | tail -n +3 \
+    | cut -d ':' -f 1
+}
+
+#
 # Output usage information.
 # 
 
@@ -182,7 +195,7 @@ HELP
 }
 
 # Handle arguments
-echo $#
+
 if [[ $# -eq 0 ]]; then
   install
 else
