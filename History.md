@@ -1,9 +1,19 @@
 
+0.0.4 / 2010-08-04
+==================
+
+  * Removed bashisms [thanks dvv]
+  * Added listing of user distros
+  * Added installing of user distros
+  * Added support for node "latest"
+  * Changed; install script now installs to the CWD
+  * Fixed node install, no longer defers
+  * Fixed bin/ndistro --version
+
 0.0.3 / 2010-07-28
 ==================
 
   * Altering node shebang lines to ./bin/node
-
 
 0.0.2 / 2010-07-27
 ==================
