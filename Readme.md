@@ -3,7 +3,7 @@
 
  Node distribution shell script. _nDistro_ allows you to build your own
  [node](http://nodejs.org) distribution using a simple configuration file, without 
-dependencies large programs. To contribute a node binary head over to [nodes](http://github.com/visionmedia/nodes).
+depending on large programs. To contribute a node binary head over to [nodes](http://github.com/visionmedia/nodes).
 
 ## Installation
 
