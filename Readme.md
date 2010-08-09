@@ -45,6 +45,20 @@ To install one to the **CWD** run:
 or
     $ ndistro visionmedia express
 
+## Updating A Library
+
+Updating a library with nDistro is easy, first remove it:
+
+    $ rm -fr modules/express
+
+then execute `ndistro` again:
+
+    $ ndistro
+
+or if you wish to have a clean start and re-install everything:
+
+    $ rm -fr bin modules && ndistro
+
 ## node <version>
 
   Specifies the _version_ of node to install.
