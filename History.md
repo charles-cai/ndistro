@@ -1,4 +1,9 @@
 
+0.0.5 / 2010-09-22 
+==================
+
+  * When _index.js_ is found link the entire directory
+
 0.0.4 / 2010-08-04
 ==================
 
