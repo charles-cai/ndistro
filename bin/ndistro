@@ -98,13 +98,13 @@ bin() {
 #
 lib() {
   mkdir -p $ROOT/lib/node
-  if test -d $ROOT/modules/$mod/lib; then
+  if test -f $ROOT/modules/$mod/index.js; then
+    cd $ROOT/lib/node
+    ln -sf ../../modules/$mod ./$mod
+    cd ../..
+  elif test -d $ROOT/modules/$mod/lib; then
     cd $ROOT/lib/node
     ln -sf ../../modules/$mod/lib/* ./
-    cd ../..
-  elif test -f $ROOT/modules/$mod/index.js; then
-    cd $ROOT/lib/node
-    ln -sf ../../modules/$mod/index.js ./$mod.js
     cd ../..
   fi
 }
