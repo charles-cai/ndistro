@@ -127,7 +127,11 @@ install_node() {
 #
 
 node() {
-  local machine=$(uname -m)
+  if test $2; then
+    local machine=$2
+  else
+    local machine=$(uname -m)
+  fi
   if test $1 = "latest"; then
     log "fetching latest node"
     local latest=$($GET "$BIN_URL/latest" 2> /dev/null)
