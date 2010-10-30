@@ -216,8 +216,8 @@ Commands:
 
 Options:
 
--V, --version   Output version number
--h, --help      Output help information
+  -V, --version   Output version number
+  -h, --help      Output help information
 
 HELP
 }
