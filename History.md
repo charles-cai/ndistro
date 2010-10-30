@@ -1,4 +1,10 @@
 
+0.1.0 / 2010-10-29 
+==================
+
+  * Added possibility to manually set architecture
+  * Only output "already installed node" when the versions match
+
 0.0.5 / 2010-09-22 
 ==================
 
