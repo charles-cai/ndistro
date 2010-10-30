@@ -241,7 +241,8 @@ else
       rm -fr /tmp/ndistro \
         && git clone --depth 1 -q git://github.com/visionmedia/ndistro.git /tmp/ndistro \
         && cp /tmp/ndistro/bin/ndistro $0 \
-        && log "updated $VERSION to" $($0 --version)
+        && log "updated $VERSION to" $($0 --version) \
+        && exit
       ;;
     edit)
       $EDITOR $ROOT/.ndistro
