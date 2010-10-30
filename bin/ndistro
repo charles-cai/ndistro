@@ -10,6 +10,7 @@
 # Library version
 
 VERSION="0.1.0"
+DIR=${0%/*}
 ROOT=$(pwd)
 BIN_URL="http://github.com/visionmedia/nodes/raw/master"
 GET=
@@ -212,6 +213,7 @@ Usage: ndistro [options] [cmd]
 Commands:
 
   edit              Opens CWD/.ndistro in $EDITOR
+  update            Update ndistro to the latest version
   <user> <distro>   Installs the given <distro> from <user>
 
 Options:
@@ -233,6 +235,13 @@ else
       ;;
     -V|--version)
       echo $VERSION && exit 1
+      ;;
+    update)
+      log "updating $0"
+      rm -fr /tmp/ndistro \
+        && git clone --depth 1 -q git://github.com/visionmedia/ndistro.git /tmp/ndistro \
+        && cp /tmp/ndistro/bin/ndistro $0 \
+        && log "updated $VERSION to" $($0 --version)
       ;;
     edit)
       $EDITOR $ROOT/.ndistro
