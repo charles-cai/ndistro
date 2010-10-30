@@ -148,7 +148,13 @@ node() {
     fi
   else
     if test -f $ROOT/bin/node; then
-      log "already installed node $1"
+      local version=$($ROOT/bin/node --version)
+      if test "$version" = "v$1"; then
+        log "already installed node $1"
+      else
+        log "updating from node $version"
+        install_node $1 $machine
+      fi
     else
       install_node $1 $machine
     fi
