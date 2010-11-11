@@ -9,7 +9,7 @@
 
 # Library version
 
-VERSION="0.1.2"
+VERSION="0.2.0"
 DIR=${0%/*}
 ROOT=$(pwd)
 BIN_URL="http://github.com/visionmedia/nodes/raw/master"
