@@ -65,6 +65,7 @@ module() {
       | tar -xz --strip 1 \
       && cd ../.. \
       && bin $mod \
+      && build $mod \
       && lib $mod
   fi
 }
@@ -95,9 +96,24 @@ bin() {
 }
 
 #
+# Maybe build <mod>.
+#
+
+build() {
+  local mod=$1
+  if test -f $ROOT/modules/$mod/wscript; then
+    log "building $mod"
+    cd $ROOT/modules/$mod \
+      && node-waf configure build
+  fi
+}
+
+#
 # Install <mod> library.
 #
+
 lib() {
+  local mod=$1
   mkdir -p $ROOT/lib/node
   if test -f $ROOT/modules/$mod/index.js; then
     cd $ROOT/lib/node
